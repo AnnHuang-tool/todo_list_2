@@ -12,6 +12,10 @@ app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
+const db = require('./models')
+const Todo = db.Todo
+const User = db.User
+
 // 設定路由
 // 首頁
 app.get('/', (req, res) => {
@@ -33,8 +37,14 @@ app.get('/users/register', (req, res) => {
 })
 
 app.post('/users/register', (req, res) => {
-  res.send('register')
+  const { name, email, password, confirmPassword } = req.body
+  User.create({ name, email, password })
+    .then(user => res.redirect('/'))
 })
+
+// app.post('/users/register', (req, res) => {
+//   res.send('register')
+// })
 
 app.get('/users/logout', (req, res) => {
   res.send('logout')
