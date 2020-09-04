@@ -32,6 +32,7 @@ app.use(methodOverride('_method'))
 // const User = db.User
 
 usePassport(app)
+
 app.use(flash())
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
@@ -119,11 +120,12 @@ app.use((req, res, next) => {
 // app.get('/users/logout', (req, res) => {
 //   res.send('logout')
 // })
-app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.isAuthenticated()
-  res.locals.user = req.user
-  next()
-})
+
+// app.use((req, res, next) => {
+//   res.locals.isAuthenticated = req.isAuthenticated()
+//   res.locals.user = req.user
+//   next()
+// })
 
 
 app.use(routes)
